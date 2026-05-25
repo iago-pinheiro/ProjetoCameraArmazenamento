@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "ProjetoCameraArmazenamento",
+    "slug": "ProjetoCameraArmazenamento",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Este aplicativo precisa de acesso à câmera para tirar fotos e gravar vídeos.",
+        "NSMicrophoneUsageDescription": "Este aplicativo precisa de acesso ao microfone para gravar vídeos com áudio."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Este aplicativo precisa de acesso à câmera para tirar fotos e gravar vídeos.",
+          "enableMicrophonePermission": true,
+          "microphonePermissionText": "Este aplicativo precisa de acesso ao microfone para gravar vídeos com áudio."
+        }
+      ],
+      "expo-dev-client",
+      "expo-media-library"
+    ]
+  }
+}
