@@ -46,7 +46,8 @@
           "savePhotosPermission": "Permitir salvar fotos.",
           "isAccessMediaLocationEnabled": true
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "extra": {
       "eas": {
