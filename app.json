@@ -30,11 +30,6 @@
         "android.permission.RECORD_AUDIO",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.ACCESS_MEDIA_LOCATION",
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.ACCESS_MEDIA_LOCATION"
       ],
       "package": "com.iagopinheiro.ProjetoCameraArmazenamento"
@@ -52,6 +47,12 @@
           "isAccessMediaLocationEnabled": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2c6fa686-197f-476c-a762-d1fd039b814d"
+      }
+    },
+    "owner": "iago-pinheiro"
   }
 }
