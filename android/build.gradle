@@ -6,9 +6,10 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath('com.android.tools.build:gradle')
+    // AGP 8.9.1 exigido pelo react-native-vision-camera v5 (androidx.camera 1.7.0-alpha01 e androidx.core 1.17.0)
+    classpath('com.android.tools.build:gradle:8.9.1')
     classpath('com.facebook.react:react-native-gradle-plugin')
-    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20')
   }
 }
 
