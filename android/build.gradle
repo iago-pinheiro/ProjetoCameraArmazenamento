@@ -6,22 +6,10 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    // AGP 8.9.1 exigido pelo react-native-vision-camera v5 (androidx.camera 1.7.0-alpha01 e androidx.core 1.17.0)
-    classpath('com.android.tools.build:gradle:8.9.1')
+    classpath('com.android.tools.build:gradle')
     classpath('com.facebook.react:react-native-gradle-plugin')
-    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20')
+    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
   }
-}
-
-// Versões do SDK exigidas pelo react-native-vision-camera v5 e react-native-nitro-modules
-// Precisam ser definidas aqui para que todos os sub-projetos usem os mesmos valores
-ext {
-  compileSdkVersion   = 36
-  targetSdkVersion    = 36
-  minSdkVersion       = 24
-  ndkVersion          = "27.1.12297006"
-  kotlinVersion       = "2.1.20"
-  buildToolsVersion   = "35.0.0"
 }
 
 def reactNativeAndroidDir = new File(

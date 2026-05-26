@@ -19,7 +19,7 @@
     "react-native": "0.79.6",
     "react-native-nitro-image": "^0.14.0",
     "react-native-nitro-modules": "^0.35.7",
-    "react-native-vision-camera": "^5.0.10"
+    "react-native-vision-camera": "^4.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
