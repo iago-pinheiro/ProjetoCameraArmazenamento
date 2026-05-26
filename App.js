@@ -86,12 +86,15 @@ export default function App() {
     });
   };
 
-  // 1. FUNÇÃO PARA TIRAR FOTO usando a react-native-vision-camera (SUBSTITUIÇÃO do expo-image-picker)
+  // 1. FUNÇÃO PARA TIRAR FOTO usando a react-native-vision-camera
   const takePhoto = async () => {
     // Verifica se a permissão de câmera foi concedida antes de abrir o preview
     if (!hasCameraPermission) {
-      Alert.alert("Erro", "Permissão de câmera não concedida.");
-      return;
+      const result = await requestCameraPermission();
+      if (!result) {
+        Alert.alert("Erro", "Permissão de câmera não concedida.");
+        return;
+      }
     }
     // Define o modo como foto e exibe o preview da câmera em tela cheia
     setCameraMode("photo");
@@ -129,14 +132,20 @@ export default function App() {
       }
     } catch (error) {
       // Captura erros inesperados durante a captura da foto e alerta o usuário
-      Alert.alert("Erro", "Houve um erro ao tirar a foto.");
+      Alert.alert("Erro", "Houve um erro ao tirar a foto: " + error.message);
     }
   };
 
-  // 2. FUNÇÃO PARA GRAVAR VÍDEO usando a react-native-vision-camera (SUBSTITUIÇÃO do expo-image-picker)
-  const recordVideo = () => {
+  // 2. FUNÇÃO PARA GRAVAR VÍDEO usando a react-native-vision-camera
+  const recordVideo = async () => {
     // Verifica se as permissões de câmera e microfone foram concedidas
-    if (!hasCameraPermission || !hasMicPermission) {
+    let hasCam = hasCameraPermission;
+    let hasMic = hasMicPermission;
+    
+    if (!hasCam) hasCam = await requestCameraPermission();
+    if (!hasMic) hasMic = await requestMicPermission();
+
+    if (!hasCam || !hasMic) {
       Alert.alert("Erro", "Permissões de câmera e microfone são necessárias para gravar vídeos.");
       return;
     }
@@ -238,21 +247,27 @@ export default function App() {
     // View principal que ocupa toda a tela
     <View style={styles.container}>
 
-      {/* Condição: exibe o preview da câmera quando showCamera é true e o device está disponível */}
-      {showCamera && device ? (
+      {/* Condição: exibe o preview da câmera quando showCamera é true */}
+      {showCamera ? (
         // View que ocupa toda a tela para exibir o preview em tempo real
         <View style={styles.cameraContainer}>
-
-          {/* Componente Camera da vision-camera — exibe o preview em tempo real */}
-          <Camera
-            ref={cameraRef}              // Referência para chamar takePhoto e startRecording
-            style={styles.camera}        // Ocupa toda a área do container
-            device={device}              // Dispositivo de câmera selecionado (frontal ou traseira)
-            isActive={showCamera}        // Ativa o preview somente quando showCamera é true
-            photo={cameraMode === "photo"}  // Habilita o modo de foto conforme o modo selecionado
-            video={cameraMode === "video"}  // Habilita o modo de vídeo conforme o modo selecionado
-            audio={cameraMode === "video"}  // Habilita o áudio somente no modo de gravação de vídeo
-          />
+          
+          {/* Componente Camera da vision-camera — exibe o preview em tempo real ou texto de carregando */}
+          {device ? (
+            <Camera
+              ref={cameraRef}              // Referência para chamar takePhoto e startRecording
+              style={styles.camera}        // Ocupa toda a área do container
+              device={device}              // Dispositivo de câmera selecionado (frontal ou traseira)
+              isActive={showCamera}        // Ativa o preview somente quando showCamera é true
+              photo={cameraMode === "photo"}  // Habilita o modo de foto conforme o modo selecionado
+              video={cameraMode === "video"}  // Habilita o modo de vídeo conforme o modo selecionado
+              audio={cameraMode === "video"}  // Habilita o áudio somente no modo de gravação de vídeo
+            />
+          ) : (
+            <View style={[styles.camera, { justifyContent: 'center', alignItems: 'center', backgroundColor: 'black' }]}>
+              <Text style={{ color: 'white', fontSize: 18 }}>Carregando câmera...</Text>
+            </View>
+          )}
 
           {/* Botões de controle sobrepostos ao preview da câmera */}
           <View style={styles.cameraControls}>
